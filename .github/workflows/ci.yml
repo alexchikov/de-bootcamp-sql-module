@@ -1,0 +1,35 @@
+name: Docker Image CI
+
+on:
+  pull_request:
+    branches: [ "master" ]
+    types: [ "open" ]
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build
+      env:
+          APP_NAME: ${{ secrets.APP_NAME }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          
+      run: |
+          git pull && \
+          docker stop $APP_NAME && \
+          docker rm $APP_NAME && \
+          docker build --no-cache --progress=plain --tag=de-bootcamp/sql-module:latest .
+
+  check_simple_queries:
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Test simple queries tasks
+
+    run: |
+        docker run 
