@@ -30,7 +30,7 @@ services:
     command: ["filldb"]
 
   test:
-    build: blinsash/de-bootcamp-base:latest
+    image: blinsash/de-bootcamp-base:latest
     depends_on:
       filldb:
         condition: service_completed_successfully
