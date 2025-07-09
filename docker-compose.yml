@@ -42,6 +42,6 @@ services:
       DBPORT: 5432
     command: ["test"]
     volumes:
-      - ./simple-queries/tasks:/work/simple-queries/tasks
-      - ./complex-queries/tasks:/work/complex-queries/tasks
+      - ./simple-queries/tasks:/work/simple_queries/tasks
+      - ./complex-queries/tasks:/work/complex_queries/tasks
       - ./functions/tasks:/work/functions/tasks

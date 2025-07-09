@@ -21,10 +21,10 @@ jobs:
         run: docker-compose run --rm filldb
 
       - name: 🧪 Test simple-queries
-        run: docker-compose run --rm -e MODULE=simple-queries test
+        run: docker-compose run --rm -e MODULE=simple_queries test
 
       - name: 🧪 Test complex-queries
-        run: docker-compose run --rm -e MODULE=complex-queries test
+        run: docker-compose run --rm -e MODULE=complex_queries test
 
       - name: 🧪 Test functions
         run: docker-compose run --rm -e MODULE=functions test
