@@ -45,3 +45,6 @@ services:
       - ./simple-queries/tasks:/work/simple_queries/tasks
       - ./complex-queries/tasks:/work/complex_queries/tasks
       - ./functions/tasks:/work/functions/tasks
+
+volumes:
+  pgdata:
