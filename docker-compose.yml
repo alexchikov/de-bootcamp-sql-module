@@ -1,0 +1,47 @@
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: test
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./ddl:/docker-entrypoint-initdb.d
+    ports:
+      - "4000:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  filldb:
+    image: blinsash/de-bootcamp-base:latest
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DBNAME: test
+      DBUSER: test
+      DBPASSWORD: test
+      DBHOST: db
+      DBPORT: 5432
+    command: ["filldb"]
+
+  test:
+    build: blinsash/de-bootcamp-base:latest
+    depends_on:
+      filldb:
+        condition: service_completed_successfully
+    environment:
+      DBNAME: test
+      DBUSER: test
+      DBPASSWORD: test
+      DBHOST: db
+      DBPORT: 5432
+    command: ["test"]
+    volumes:
+      - ./simple-queries/tasks:/work/simple-queries/tasks
+      - ./complex-queries/tasks:/work/complex-queries/tasks
+      - ./functions/tasks:/work/functions/tasks
