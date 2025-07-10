@@ -34,3 +34,6 @@ jobs:
 
       - name: 🧪 Test functions
         run: docker-compose run --rm -e MODULE=functions test
+
+      - name: 🧹 Clean up
+        run: docker-compose down --volumes --remove-orphans
