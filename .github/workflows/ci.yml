@@ -36,4 +36,5 @@ jobs:
         run: docker-compose run --rm -e MODULE=functions test
 
       - name: 🧹 Clean up
+        if: always()
         run: docker-compose down --volumes --remove-orphans
