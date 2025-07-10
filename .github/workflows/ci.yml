@@ -37,4 +37,6 @@ jobs:
 
       - name: 🧹 Clean up
         if: always()
-        run: docker-compose down --volumes --remove-orphans
+        run: |
+          docker-compose down --volumes --remove-orphans
+          sudo chown -R $USER:$USER .
