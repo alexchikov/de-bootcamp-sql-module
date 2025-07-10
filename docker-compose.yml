@@ -7,7 +7,7 @@ services:
       POSTGRES_DB: test
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./ddl:/docker-entrypoint-initdb.d
+      - ./ddl/:/docker-entrypoint-initdb.d
     ports:
       - "4000:5432"
     healthcheck:
