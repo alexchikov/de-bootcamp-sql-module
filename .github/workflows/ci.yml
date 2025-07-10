@@ -38,5 +38,7 @@ jobs:
       - name: 🧹 Clean up
         if: always()
         run: |
+          echo "$SUDO_PASSWORD" | sudo chown -R $USER:$USER .
           docker-compose down --volumes --remove-orphans
-          sudo chown -R $USER:$USER .
+        env:
+          SUDO_PASSWORD: ${{ secrets.SUDO_PASSWORD }}
